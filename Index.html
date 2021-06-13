@@ -3,14 +3,61 @@
 <head> 
     <meta charset="UTF-8" />
     <title>eClipse</title>
-    
-    <script src="//cdn.jsdelivr.net/npm/phaser@3.11.0/dist/phaser.js"></script>
-    <script type="text/javascript" src="./Js/Preloader.js"></script>
-    <script type="text/javascript" src="./Js/Controle.js"></script>
-    <script type="text/javascript" src="./Js/Scene1.js"></script>
-    <script type="text/javascript" src="./Js/Main.js"></script>
-    
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script type="text/javascript" src= "scene/Menu.js"></script>
+    <script type="text/javascript" src= "scene/controle.js"></script>
+    <script type="text/javascript" src= "scene/Projectile.js"></script>
+    <script type="text/javascript" src= "scene/Scene1.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
+
+<script type="text/javascript">
+
+var player;
+var inputP = [false, false, false, false,false];
+var xAxis = 0;
+var yAxis = 0;
+
+var toucheSol=true;
+var doubleSaut=false;
+var doubleSautActif=false;
+
+var vie = 5;
+
+var firedirection = [false,false,false];
+var nbProjectile = true;
+var p = 10 ;
+var fire = false ;
+var timerProj = 0 ;
+var recoveryProjectile = false; 
+
+var x = 0 ;
+var y = 0 ;
+
+
+var config = {
+    type: Phaser.WEBGL,
+    width: 896,
+    height: 448,
+    physics: {
+        default: 'arcade',
+        arcade: { 
+            gravity: { y: 0 },
+            debug: true
+        }
+    },
+    input: {gamepad:true},
+    scene: [Menu,Control,Scene1]
+};
+
+var game = new Phaser.Game(config);
+
+</script>
+
 </body>
 </html>
