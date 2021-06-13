@@ -13,6 +13,6 @@ class Menu extends Phaser.Scene{
         this.load.image('Map',"Asset/Asset_eClipse.png");
     }
     create(){
-        this.scene.start('scene1', {playerX: 100, playerY: 500, speed: 300 })
+        this.scene.start('scene1', {playerX: 100, playerY: 500, speed: 300 ,vie: 5})
     }
 } 

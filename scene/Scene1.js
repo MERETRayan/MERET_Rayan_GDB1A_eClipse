@@ -13,6 +13,8 @@ class Scene1 extends Phaser.Scene {
         this.speed = data.speed;
         this.playerSpeed = this.speed;
 
+        this.life = data.vie;
+
 
     }
    
@@ -35,13 +37,13 @@ class Scene1 extends Phaser.Scene {
         wall.setCollisionByProperty({collides: true })
         platform.setCollisionByProperty({collides: true })
 
-       const debugGraphics = this.add.graphics().setAlpha(0.7)
+       /*const debugGraphics = this.add.graphics().setAlpha(0.7)
         sol.renderDebug(debugGraphics,{
             tileColor: null,
             collidingTileColor: new Phaser.Display.Color(243,234,48,255),
             faceColor: new Phaser.Display.Color(40,39,37,255)
         })  
-        /*
+        
         pique.renderDebug(debugGraphics,{
             tileColor: null,
             collidingTileColor: new Phaser.Display.Color(243,234,48,255),
@@ -61,7 +63,10 @@ class Scene1 extends Phaser.Scene {
 
 
         this.control = this.scene.get('control');
+        this.life = this.scene.get("life")
+
         player = this.player = this.physics.add.sprite(this.x, this.y, 'player');
+        vie = this.life;
         this.player.setGravityY(200);
         this.player.body.setSize(80,120).setOffset(100,70)
         this.player.setBounce(0.0);
@@ -95,7 +100,6 @@ class Scene1 extends Phaser.Scene {
     update(){
         if (vie <= 0 )
         {
-            vie=5;
             this.registry.destroy();
             this.events.off();
             this.scene.restart();
@@ -158,5 +162,5 @@ function resetJump() {
     doubleSaut=false;
 }
 function mort() {
-    vie=0;
+    vie = 0 ;
 }
