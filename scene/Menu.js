@@ -29,9 +29,6 @@ class Menu extends Phaser.Scene{
             repeat: -1
         });
 
-
-
-
         this.anims.create({
             key: '5vie_10blood',
             frames: [ { key: 'barreVie', frame: 0 } ],
