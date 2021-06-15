@@ -6,7 +6,7 @@ class Control extends Phaser.Scene{
 
     inputPP(cursors, inputP, pad, xAxis, yAxis){
         //Input
-        inputP[4] = cursors.buttonX.isDown || pad.R2 ? true : false;
+        inputP[4] = cursors.buttonX.isDown || pad.B ? true : false;
 
         inputP[3] = cursors.space.isDown || pad.A ? true : false;
         
@@ -47,7 +47,7 @@ class Control extends Phaser.Scene{
             player.setVelocityX(0);
         }
 
-        if (inputP[3] && player.body.onFloor() && toucheSol==true){
+        if (inputP[3]  && toucheSol==true){
             player.setVelocityY(-250);
             toucheSol=false;
         }

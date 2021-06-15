@@ -14,6 +14,7 @@ class Scene1 extends Phaser.Scene {
         this.playerSpeed = this.speed;
 
         this.life = data.vie;
+        this.sang = data.blood;
 
 
     }
@@ -21,7 +22,6 @@ class Scene1 extends Phaser.Scene {
 
     create(){
         
-        this.bg = this.add.image(0,0,"bg").setOrigin(0,0);
         this.physics.world.setBounds(0, 0, 6400, 3340);
 
         const map = this.make.tilemap({ key: 'Foret' })
@@ -37,36 +37,18 @@ class Scene1 extends Phaser.Scene {
         wall.setCollisionByProperty({collides: true })
         platform.setCollisionByProperty({collides: true })
 
-       /*const debugGraphics = this.add.graphics().setAlpha(0.7)
-        sol.renderDebug(debugGraphics,{
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        })  
-        
-        pique.renderDebug(debugGraphics,{
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        }) 
-        platform.renderDebug(debugGraphics,{
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        }) 
-        wall.renderDebug(debugGraphics,{
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243,234,48,255),
-            faceColor: new Phaser.Display.Color(40,39,37,255)
-        }) 
-*/
-
 
         this.control = this.scene.get('control');
-        this.life = this.scene.get("life")
+      
+        
 
         player = this.player = this.physics.add.sprite(this.x, this.y, 'player');
+        this.barreVie = this.physics.add.sprite(0,0,'barreVie').setOrigin(0,0);
+        this.barreVie.setScrollFactor(0,0);
+        this.buttonProj = this.physics.add.sprite(785,340,'buttonProj').setOrigin(0,0);
+        this.buttonProj.setScrollFactor(0,0);
         vie = this.life;
+        blood = this.sang;
         this.player.setGravityY(200);
         this.player.body.setSize(80,120).setOffset(100,70)
         this.player.setBounce(0.0);
@@ -77,6 +59,7 @@ class Scene1 extends Phaser.Scene {
             'left': Phaser.Input.Keyboard.KeyCodes.LEFT,
             'right': Phaser.Input.Keyboard.KeyCodes.RIGHT,
             'space' : Phaser.Input.Keyboard.KeyCodes.SPACE,
+            'buttonC' : Phaser.Input.Keyboard.KeyCodes.C,
             'buttonX' : Phaser.Input.Keyboard.KeyCodes.X,
         });
 
@@ -98,8 +81,223 @@ class Scene1 extends Phaser.Scene {
     }
  
     update(){
+        
+        if (vie == 5 ){
+            if (blood==10){
+                this.barreVie.anims.play("5vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("5vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("5vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("5vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("5vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("5vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("5vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("5vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("5vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("5vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("5vie_0blood",true);
+            }
+    
+        }
+        if (vie == 4 ){
+            if (blood==10){
+                this.barreVie.anims.play("4vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("4vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("4vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("4vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("4vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("4vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("4vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("4vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("4vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("4vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("4vie_0blood",true);
+            }
+        }
+        if (vie == 3 ){
+            if (blood==10){
+                this.barreVie.anims.play("3vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("3vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("3vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("3vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("3vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("3vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("3vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("3vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("3vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("3vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("3vie_0blood",true);
+            }
+        }
+        if (vie == 2 ){
+            if (blood==10){
+                this.barreVie.anims.play("2vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("2vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("2vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("2vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("2vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("2vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("2vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("2vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("2vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("2vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("2vie_0blood",true);
+            }
+        }
+        if (vie == 1 ){
+            if (blood==10){
+                this.barreVie.anims.play("1vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("1vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("1vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("1vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("1vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("1vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("1vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("1vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("1vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("1vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("1vie_0blood",true);
+            }
+        }
+        if (vie == 0 ){
+            if (blood==10){
+                this.barreVie.anims.play("0vie_10blood",true);
+            }
+            if (blood==9){
+                this.barreVie.anims.play("0vie_9blood",true);
+            }
+            if (blood==8){
+                this.barreVie.anims.play("0vie_8blood",true);
+            }
+            if (blood==7){
+                this.barreVie.anims.play("0vie_7blood",true);
+            }
+            if (blood==6){
+                this.barreVie.anims.play("0vie_6blood",true);
+            }
+            if (blood==5){
+                this.barreVie.anims.play("0vie_5blood",true);
+            }
+            if (blood==4){
+                this.barreVie.anims.play("0vie_4blood",true);
+            }
+            if (blood==3){
+                this.barreVie.anims.play("0vie_3blood",true);
+            }
+            if (blood==2){
+                this.barreVie.anims.play("0vie_2blood",true);
+            }
+            if (blood==1){
+                this.barreVie.anims.play("0vie_1blood",true);
+            }
+            if (blood==0){
+                this.barreVie.anims.play("0vie_0blood",true);
+            }
+        }
+
         if (vie <= 0 )
         {
+            toucheSol=true;
+            cdHeal=true;
             this.registry.destroy();
             this.events.off();
             this.scene.restart();
@@ -122,19 +320,59 @@ class Scene1 extends Phaser.Scene {
         //Y
         this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[1]);
 
-     
+        if (fire==true)
+        {
+            this.buttonProj.anims.play("ProjOn",true);
+        }
+        if (fire==false)
+        {
+            this.buttonProj.anims.play("ProjOff",true);
+        }
     
-        if (this.cursors.buttonX.isDown && fire==true && nbProjectile==true)
+        if (this.cursors.buttonX.isDown && fire==true && nbProjectile==true || pad.B && fire==true && nbProjectile==true)
         {
             this.shootBeam();
             nbProjectile=false;  
             fire=false ;
-            if (p>0)
+            if (blood==0)
             {
-               p = p - 1;
+                vie -=1 ;
+            }
+            if (blood>0)
+            {
+               blood = blood - 1;
+            }
+            if (blood<0)
+            {
+                blood=0;
+            }
+           
+        }
+        if (blood>10 || blood<0)
+        {
+            blood=10;
+        }
+        if (vie>5 || vie<0)
+        {
+            vie=5;
+        }
+        if (this.cursors.buttonC.isDown && cdHeal==true && vie<5 || pad.Y && cdHeal==true  && vie<5)
+        {
+            cdHeal=false;
+            vie += 2;
+            blood -= 3 ; 
+            
+        }
+        if(cdHeal == false){
+            timerHeal = timerHeal + 1
+            if(timerHeal >= 1000)
+            {
+                cdHeal=true;
+                timerHeal = 0;
             }
         }
-        if (this.cursors.buttonX.isUp && p>0 && recoveryProjectile == false || !pad.X && p>0 && recoveryProjectile == false)
+
+        if (this.cursors.buttonX.isUp && vie>0 && recoveryProjectile == false || !pad.B && vie>0 && recoveryProjectile == false)
         {
             fire=true;
             nbProjectile=true;
@@ -149,8 +387,21 @@ class Scene1 extends Phaser.Scene {
                 timerProj = 0;
             }
         }
-
+        if(gainSang == true){
+            timerSang = timerSang + 1
+            if(timerSang >= 1000)
+            {
+                blood += 1;
+                if (blood>=10)
+                {
+                    blood=10;
+                }
+                timerSang = 0;
+            }
         }
+       
+        }
+        
 
     shootBeam(){
         var beam = new Beam(this);
@@ -158,9 +409,13 @@ class Scene1 extends Phaser.Scene {
 
 }
 function resetJump() {
-    toucheSol=true;
-    doubleSaut=false;
-}
+    if ( player.body.onFloor())
+    {
+        toucheSol=true;
+        doubleSaut=false;
+    }
+    }
+   
 function mort() {
     vie = 0 ;
 }
