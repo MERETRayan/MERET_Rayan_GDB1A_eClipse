@@ -9,7 +9,19 @@ class Beam extends Phaser.GameObjects.Sprite{
   
       // 3.2 add to scene
       scene.add.existing(this);
-  
+      
+      if (firedirection[0])
+      {
+        this.play("Projright");
+      }
+      else if (firedirection[1])
+      {
+        this.play("Projleft");
+      }
+      else 
+      {
+        this.play("Projright");
+      }
       // 3.3
       scene.physics.world.enableBody(this);
 

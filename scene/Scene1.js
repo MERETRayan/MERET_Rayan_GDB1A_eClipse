@@ -84,10 +84,18 @@ class Scene1 extends Phaser.Scene {
     }
  
     update(){
+        let pad = Phaser.Input.Gamepad.Gamepad;
+    
+        if(this.input.gamepad.total){   //Si une manette est connecté
+            pad = this.input.gamepad.getPad(0);  //pad récupère les inputs du joueur
+            xAxis = pad ? pad.axes[0].getValue() : 0;   //Si le stick est utilisé xAxys récupère la valeur sur l'axe X, sinon il est égale a 0
+            yAxis = pad ? pad.axes[1].getValue() : 0;   //Pareil pour l'axe Y
+    }
+    
         if (debut==true)
         {
             this.bgcontrol.setVisible(true);
-            if (this.cursors.buttonX.isDown==true)
+            if (this.cursors.buttonX.isDown==true || pad.A)
             {
                 debut=false; 
                 this.bgcontrol.setVisible(false);
@@ -316,14 +324,7 @@ class Scene1 extends Phaser.Scene {
             this.scene.restart();
             
         }
-        let pad = Phaser.Input.Gamepad.Gamepad;
-    
-        if(this.input.gamepad.total){   //Si une manette est connecté
-            pad = this.input.gamepad.getPad(0);  //pad récupère les inputs du joueur
-            xAxis = pad ? pad.axes[0].getValue() : 0;   //Si le stick est utilisé xAxys récupère la valeur sur l'axe X, sinon il est égale a 0
-            yAxis = pad ? pad.axes[1].getValue() : 0;   //Pareil pour l'axe Y
-    }
-    
+       
     toucheSol = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[2];
     doubleSaut = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[3];
     doubleSautActif = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[4];

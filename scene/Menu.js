@@ -9,7 +9,7 @@ class Menu extends Phaser.Scene{
         this.load.spritesheet("barreVie","Asset/Vie.png", { frameWidth: 275.3 , frameHeight: 99.6 });
         this.load.image("bg","Asset/Ecran_Titre.png");
         this.load.image("control","Asset/control.png");
-        this.load.image("beam","asset/Oeuf.png");
+        this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
         this.load.spritesheet("buttonProj","asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.tilemapTiledJSON('Foret', 'Asset/Map_eClipse.json');
@@ -17,6 +17,21 @@ class Menu extends Phaser.Scene{
     }
     create(){
         this.scene.start('titre')
+
+        this.anims.create({
+            key: 'Projright',
+            frames: this.anims.generateFrameNumbers('beam', { start: 3, end: 5 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'Projleft',
+            frames: this.anims.generateFrameNumbers('beam', { start: 0, end: 2 }),
+            frameRate: 10,
+            repeat: -1
+        });
+
 
         this.anims.create({
             key: 'HealOn',
