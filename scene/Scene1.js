@@ -37,6 +37,15 @@ class Scene1 extends Phaser.Scene {
         wall.setCollisionByProperty({collides: true })
         platform.setCollisionByProperty({collides: true })
 
+        this.cursors = this.input.keyboard.addKeys({ 'up': Phaser.Input.Keyboard.KeyCodes.UP,
+            'down': Phaser.Input.Keyboard.KeyCodes.DOWN, 
+            'left': Phaser.Input.Keyboard.KeyCodes.LEFT,
+            'right': Phaser.Input.Keyboard.KeyCodes.RIGHT,
+            'space' : Phaser.Input.Keyboard.KeyCodes.SPACE,
+            'buttonC' : Phaser.Input.Keyboard.KeyCodes.C,
+            'buttonX' : Phaser.Input.Keyboard.KeyCodes.X,
+            
+        });
 
         this.control = this.scene.get('control');
       
@@ -47,21 +56,14 @@ class Scene1 extends Phaser.Scene {
         this.barreVie.setScrollFactor(0,0);
         this.buttonProj = this.physics.add.sprite(785,340,'buttonProj').setOrigin(0,0);
         this.buttonProj.setScrollFactor(0,0);
+        this.heal = this.physics.add.sprite(685,341,'Heal').setOrigin(0,0);
+        this.heal.setScrollFactor(0,0);
         vie = this.life;
         blood = this.sang;
         this.player.setGravityY(200);
         this.player.body.setSize(80,120).setOffset(100,70)
         this.player.setBounce(0.0);
         this.player.setCollideWorldBounds(true);
-
-        this.cursors = this.input.keyboard.addKeys({ 'up': Phaser.Input.Keyboard.KeyCodes.UP,
-            'down': Phaser.Input.Keyboard.KeyCodes.DOWN, 
-            'left': Phaser.Input.Keyboard.KeyCodes.LEFT,
-            'right': Phaser.Input.Keyboard.KeyCodes.RIGHT,
-            'space' : Phaser.Input.Keyboard.KeyCodes.SPACE,
-            'buttonC' : Phaser.Input.Keyboard.KeyCodes.C,
-            'buttonX' : Phaser.Input.Keyboard.KeyCodes.X,
-        });
 
         this.control.resetTouche(this.cursors);
 
@@ -74,14 +76,25 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.player,platform,resetJump);
         this.physics.add.collider(this.player,wall,resetJump);
         this.physics.add.collider(this.player,pique,mort);
-        this.physics.add.collider(this.projectiles,wall);
+        this.physics.add.collider(this.projectiles,wall,destroyBullet);
         
-
+        this.bgcontrol = this.add.image(100,350,"control").setOrigin(0,0);
+        this.bgcontrol.setVisible(false);
 
     }
  
     update(){
-        
+        if (debut==true)
+        {
+            this.bgcontrol.setVisible(true);
+            if (this.cursors.buttonX.isDown==true)
+            {
+                debut=false; 
+                this.bgcontrol.setVisible(false);
+            }
+        }
+        if (debut==false)
+        {
         if (vie == 5 ){
             if (blood==10){
                 this.barreVie.anims.play("5vie_10blood",true);
@@ -329,6 +342,14 @@ class Scene1 extends Phaser.Scene {
         {
             this.buttonProj.anims.play("ProjOff",true);
         }
+        if (cdHeal==true && vie<5 && blood>=3)
+        {
+            this.heal.anims.play("HealOn",true);
+        }
+        if (cdHeal==false ||cdHeal==true && vie==5 || blood<3)
+        {
+            this.heal.anims.play("HealOff",true);
+        }
     
         if (this.cursors.buttonX.isDown && fire==true && nbProjectile==true || pad.B && fire==true && nbProjectile==true)
         {
@@ -349,15 +370,19 @@ class Scene1 extends Phaser.Scene {
             }
            
         }
-        if (blood>10 || blood<0)
+        if (blood>10)
         {
             blood=10;
         }
-        if (vie>5 || vie<0)
+        if (blood<0)
+        {
+            blood=0;
+        }
+        if (vie>5)
         {
             vie=5;
         }
-        if (this.cursors.buttonC.isDown && cdHeal==true && vie<5 || pad.Y && cdHeal==true  && vie<5)
+        if (this.cursors.buttonC.isDown && blood>=3 && cdHeal==true && vie<5 || pad.Y && blood>=3 && cdHeal==true  && vie<5)
         {
             cdHeal=false;
             vie += 2;
@@ -390,7 +415,7 @@ class Scene1 extends Phaser.Scene {
         }
         if(gainSang == true){
             timerSang = timerSang + 1
-            if(timerSang >= 1000)
+            if(timerSang >= 720)
             {
                 blood += 1;
                 if (blood>=10)
@@ -402,7 +427,7 @@ class Scene1 extends Phaser.Scene {
         }
        
         }
-        
+    }
 
     shootBeam(){
         var beam = new Beam(this);
@@ -419,4 +444,9 @@ function resetJump() {
    
 function mort() {
     vie = 0 ;
+}
+
+function destroyBullet(projectiles,wall)
+{
+    projectiles.destroy();
 }

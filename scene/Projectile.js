@@ -3,7 +3,7 @@ class Beam extends Phaser.GameObjects.Sprite{
   
       var x = scene.player.x;
       
-      var y = scene.player.y - 16;
+      var y = scene.player.y +30;
   
       super(scene, x, y, "beam");
   

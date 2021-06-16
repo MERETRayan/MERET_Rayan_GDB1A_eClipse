@@ -8,13 +8,28 @@ class Menu extends Phaser.Scene{
         this.load.spritesheet("player","Asset/Perso_Eclipse.png", { frameWidth: 200 , frameHeight: 200 });
         this.load.spritesheet("barreVie","Asset/Vie.png", { frameWidth: 275.3 , frameHeight: 99.6 });
         this.load.image("bg","Asset/Ecran_Titre.png");
+        this.load.image("control","Asset/control.png");
         this.load.image("beam","asset/Oeuf.png");
         this.load.spritesheet("buttonProj","asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.tilemapTiledJSON('Foret', 'Asset/Map_eClipse.json');
         this.load.image('Map',"Asset/Asset_eClipse.png");
     }
     create(){
-        this.scene.start('scene1', {playerX: 100, playerY: 500, speed: 300 ,vie: 5,blood: 10})
+        this.scene.start('titre')
+
+        this.anims.create({
+            key: 'HealOn',
+            frames: [ { key: 'Heal', frame: 0 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'HealOff',
+            frames: [ { key: 'Heal', frame: 1 } ],
+            frameRate: 10,
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'ProjOn',
