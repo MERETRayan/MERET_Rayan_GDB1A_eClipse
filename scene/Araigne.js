@@ -7,7 +7,7 @@ class Araigne extends Phaser.GameObjects.Sprite{
       scene.add.existing(this);
       scene.araigne.add(this);
 
-        this.play("AraiRight");  
+      this.play("AraiRight");  
   
     }
     movement(player,animAraigne){

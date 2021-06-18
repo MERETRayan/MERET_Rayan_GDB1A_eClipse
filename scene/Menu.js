@@ -11,12 +11,12 @@ class Menu extends Phaser.Scene{
         this.load.image("attack","Asset/Attack.png");
         this.load.image("control","Asset/control.png");
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
-        this.load.spritesheet("buttonProj","asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
-        this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
-        this.load.spritesheet("Araigne","asset/Araigne.png", { frameWidth: 120 , frameHeight: 40 });
-        this.load.spritesheet("Abbadon","asset/Abbadon.png", { frameWidth: 300 , frameHeight: 300 });
-        this.load.spritesheet("Archer","asset/Archer.png", { frameWidth: 100 , frameHeight: 200 });
-        this.load.spritesheet("Chauve_Souris","asset/Chauve_Souris.png", { frameWidth: 67 , frameHeight: 67 });
+        this.load.spritesheet("buttonProj","Asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Heal","Asset/life.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Araigne","Asset/Araigne.png", { frameWidth: 120 , frameHeight: 40 });
+        this.load.spritesheet("Abbadon","Asset/Abbadon.png", { frameWidth: 300 , frameHeight: 300 });
+        this.load.spritesheet("Archer","Asset/Archer.png", { frameWidth: 100 , frameHeight: 200 });
+        this.load.spritesheet("Chauve_Souris","Asset/Chauve_Souris.png", { frameWidth: 67 , frameHeight: 67 });
         this.load.tilemapTiledJSON('Foret', 'Asset/Map_eClipse.json');
         this.load.image('Map',"Asset/Asset_eClipse.png");
     }
