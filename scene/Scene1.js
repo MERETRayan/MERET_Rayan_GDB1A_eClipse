@@ -58,10 +58,10 @@ class Scene1 extends Phaser.Scene {
 
         item = this.physics.add.group();
         if (seau1 == false){
-            item.create(1800,120,"seau");
+            item1 = item.create(1800,120,"seau");
         }
-        if (seau1 == false){
-            item.create(this.x,300,"seau");
+        if (seau2 == false){
+            item2 = item.create(this.x,300,"seau");
         }
         if (seau1 == false){
             
@@ -125,7 +125,8 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.player,platform,resetJump);
         this.physics.add.collider(this.player,wall,resetJump);
         
-        this.physics.add.collider(this.player,item,collect);
+        this.physics.add.collider(this.player,item1,collect1);
+        this.physics.add.collider(this.player,item2,collect2);
 
         this.physics.add.collider(this.araigne,sol);
         this.physics.add.collider(this.araigne,platform);
@@ -606,9 +607,20 @@ function degat() {
 function atkAraigne(player,araigne) {
     araigne.destroy();
 }
-function collect(player,item) {
+function collect1(player,item) {
     seau += 1 ;
     item.destroy();
+    seau1 = true;
+}
+function collect2(player,item) {
+    seau += 1 ;
+    item.destroy();
+    seau2 = true;
+}
+function collect3(player,item) {
+    seau += 1 ;
+    item.destroy();
+    seau3 = true;
 }
 function projAraigne(projectiles,araigne) {
     araigne.destroy();
