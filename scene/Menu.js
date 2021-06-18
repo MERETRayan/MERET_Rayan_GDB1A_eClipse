@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene{
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
         this.load.spritesheet("sceau","Asset/Sceau_UI.png", { frameWidth: 200 , frameHeight: 120 });
         this.load.spritesheet("buttonProj","Asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
-        this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Heal","Asset/life.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.spritesheet("Araigne","Asset/Araigne.png", { frameWidth: 120 , frameHeight: 40 });
         this.load.spritesheet("Abbadon","Asset/Abbadon.png", { frameWidth: 300 , frameHeight: 300 });
         this.load.spritesheet("Archer","Asset/Archer.png", { frameWidth: 100 , frameHeight: 200 });
