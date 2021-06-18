@@ -24,6 +24,12 @@ class Menu extends Phaser.Scene{
         this.scene.start('titre')
 
         this.anims.create({
+            key: 'Chauve',
+            frames: this.anims.generateFrameNumbers('Chauve_Souris', { start: 0, end: 1 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
             key: 'AraiRight',
             frames: this.anims.generateFrameNumbers('Araigne', { start: 2, end: 3 }),
             frameRate: 10,

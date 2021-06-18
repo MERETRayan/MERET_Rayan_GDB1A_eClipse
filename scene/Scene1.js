@@ -83,7 +83,7 @@ class Scene1 extends Phaser.Scene {
 
         this.araigne = this.physics.add.group();
         this.araigne1 = new Araigne(this,2000,550,"Araigne");
-        //this.araigne2 = new Araigne(this,3400,550,"Araigne");
+        this.araigne2 = new Araigne(this,3400,550,"Araigne");
         
         this.abbadon = this.physics.add.group();
         new Abbadon(this,3600,450,"Abbadon");
@@ -92,7 +92,7 @@ class Scene1 extends Phaser.Scene {
         new Archer(this,3800,550,"Archer");
         
         this.chauve_souris = this.physics.add.group();
-        new Chauve_souris(this,4000,550,"Chauve_Souris");
+        new Chauve_souris(this,4000,600,"Chauve_Souris");
         
 
         this.player.setGravityY(200);
@@ -116,6 +116,10 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.araigne,sol);
         this.physics.add.collider(this.araigne,platform);
         this.physics.add.collider(this.araigne,wall);
+
+        this.physics.add.collider(this.chauve_souris,sol);
+        this.physics.add.collider(this.chauve_souris,platform);
+        this.physics.add.collider(this.chauve_souris,wall);
 
 
 
@@ -480,19 +484,32 @@ class Scene1 extends Phaser.Scene {
             }
         }
 
+
+        for(var i = 0; i < this.chauve_souris.getChildren().length; i++){
+            var chauve_souris = this.chauve_souris.getChildren()[i];
+            chauve_souris.movement(this.player);
+        }
+
+
         for(var i = 0; i < this.araigne.getChildren().length; i++){
             var araigne = this.araigne.getChildren()[i];
             animAraigne = araigne.movement(this.player,animAraigne);
         }
-        if (animAraigne)
+        if (this.player.x < this.araigne1.x)
         {
-            this.player.setTint(0x00ff00);
             this.araigne1.flipX = 180;
         }
-        if (!animAraigne)
+        if (this.player.x > this.araigne1.x)
         {
-            this.player.setTint(0xFF0000);
             this.araigne1.flipX = 0;
+        }
+        if (this.player.x < this.araigne2.x)
+        {
+            this.araigne2.flipX = 180;
+        }
+        if (this.player.x > this.araigne2.x)
+        {
+            this.araigne2.flipX = 0;
         }
 
         if (this.cursors.buttonX.isUp && vie>0 && recoveryProjectile == false || !pad.B && vie>0 && recoveryProjectile == false)

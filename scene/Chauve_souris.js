@@ -6,8 +6,17 @@ class Chauve_souris extends Phaser.GameObjects.Sprite{
   
       scene.add.existing(this);
       scene.chauve_souris.add(this);
-  
+      this.play("Chauve");  
     }
-    update(player){
-    }
+    movement(player){
+    
+    if ((player.y-this.y)<=10)
+        {
+          this.body.setVelocityY(-100);
+        }
+        if ((player.y-this.y)>=-10)
+        {
+          this.body.setVelocityY(100);
+        }
   }
+}
