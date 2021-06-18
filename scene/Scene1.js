@@ -61,7 +61,7 @@ class Scene1 extends Phaser.Scene {
             item1 = item.create(1800,120,"seau");
         }
         if (seau2 == false){
-            item2 = item.create(this.x,300,"seau");
+            item2 = item.create(3250,1630,"seau");
         }
         if (seau1 == false){
             
