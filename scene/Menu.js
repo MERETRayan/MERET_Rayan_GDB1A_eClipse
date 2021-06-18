@@ -10,9 +10,11 @@ class Menu extends Phaser.Scene{
         this.load.image("bg","Asset/Ecran_Titre.png");
         this.load.image("attack","Asset/Attack.png");
         this.load.image("control","Asset/control.png");
+        this.load.image("seau","Asset/sceau.png");
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
+        this.load.spritesheet("sceau","Asset/Sceau_UI.png", { frameWidth: 200 , frameHeight: 120 });
         this.load.spritesheet("buttonProj","Asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
-        this.load.spritesheet("Heal","Asset/life.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.spritesheet("Araigne","Asset/Araigne.png", { frameWidth: 120 , frameHeight: 40 });
         this.load.spritesheet("Abbadon","Asset/Abbadon.png", { frameWidth: 300 , frameHeight: 300 });
         this.load.spritesheet("Archer","Asset/Archer.png", { frameWidth: 100 , frameHeight: 200 });
@@ -55,6 +57,42 @@ class Menu extends Phaser.Scene{
             frameRate: 10,
             repeat: -1
         });
+
+
+
+
+
+
+        this.anims.create({
+            key: '0seau',
+            frames: [ { key: 'sceau', frame: 0 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: '1seau',
+            frames: [ { key: 'sceau', frame: 1 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: '2seau',
+            frames: [ { key: 'sceau', frame: 2 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: '3seau',
+            frames: [ { key: 'sceau', frame: 3 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+
+
+
+
+
+
 
 
         this.anims.create({

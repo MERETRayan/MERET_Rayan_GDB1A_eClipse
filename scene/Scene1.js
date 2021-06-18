@@ -55,8 +55,21 @@ class Scene1 extends Phaser.Scene {
         });
 
         this.control = this.scene.get('control');
-      
+
+        item = this.physics.add.group();
+        if (seau1 == false){
+            item.create(1800,120,"seau");
+        }
+        if (seau1 == false){
+            item.create(this.x,300,"seau");
+        }
+        if (seau1 == false){
+            
+        }
         
+        
+        sceau = this.physics.add.sprite(700, 0, 'sceau').setOrigin(0,0);
+        sceau.setScrollFactor(0,0);
         player = this.player = this.physics.add.sprite(this.x, this.y, 'player');
         this.barreVie = this.physics.add.sprite(0,0,'barreVie').setOrigin(0,0);
         this.barreVie.setScrollFactor(0,0);
@@ -85,6 +98,7 @@ class Scene1 extends Phaser.Scene {
         this.araigne1 = new Araigne(this,2000,550,"Araigne");
         this.araigne2 = new Araigne(this,3400,550,"Araigne");
         this.araigne3 = new Araigne(this,3800,2300,"Araigne");
+
         
         this.abbadon = this.physics.add.group();
         
@@ -110,8 +124,8 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.player,sol,resetJump);
         this.physics.add.collider(this.player,platform,resetJump);
         this.physics.add.collider(this.player,wall,resetJump);
-
-
+        
+        this.physics.add.collider(this.player,item,collect);
 
         this.physics.add.collider(this.araigne,sol);
         this.physics.add.collider(this.araigne,platform);
@@ -164,6 +178,19 @@ class Scene1 extends Phaser.Scene {
         }
         if (debut==false)
         {
+            if (seau==0){
+                sceau.anims.play("0seau",true);
+            }
+            if (seau==1){
+                sceau.anims.play("1seau",true);
+            }
+            if (seau==2){
+                sceau.anims.play("2seau",true);
+            }
+            if (seau==3){
+                sceau.anims.play("3seau",true);
+            }
+
         if (vie == 5 ){
             if (blood==10){
                 this.barreVie.anims.play("5vie_10blood",true);
@@ -578,6 +605,10 @@ function degat() {
 }
 function atkAraigne(player,araigne) {
     araigne.destroy();
+}
+function collect(player,item) {
+    seau += 1 ;
+    item.destroy();
 }
 function projAraigne(projectiles,araigne) {
     araigne.destroy();
