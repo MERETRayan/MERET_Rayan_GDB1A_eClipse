@@ -30,7 +30,7 @@ class Titre extends Phaser.Scene{
     }
     if (pad.A || this.cursors.buttonX.isDown)
     {
-        this.scene.start('scene1', {playerX: 100, playerY: 550, speed: 300 ,vie: 5,blood: 10})
+        this.scene.start('scene1', {playerX: 100, playerY: 575, speed: 300 ,vie: 5,blood: 10, toucheSol:true, doubleSaut:false,doubleSautActif:false ,vieAbba: 6,recovery:true ,timerRecovery:0})
     }
      
 }

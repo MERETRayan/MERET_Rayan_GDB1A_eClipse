@@ -15,8 +15,14 @@ class Scene1 extends Phaser.Scene {
 
         this.life = data.vie;
         this.sang = data.blood;
+        this.sol = data.toucheSol;
+        this.deuxSol = data.doubleSaut;
+        this.deuxSolActif = data.doubleSautActif;
 
+        this.vieAbba = data.vieAbba;
 
+        this.timerRecovery = data.timerRecovery
+        this.recovery = data.recovery
     }
    
 
@@ -43,6 +49,7 @@ class Scene1 extends Phaser.Scene {
             'right': Phaser.Input.Keyboard.KeyCodes.RIGHT,
             'space' : Phaser.Input.Keyboard.KeyCodes.SPACE,
             'buttonC' : Phaser.Input.Keyboard.KeyCodes.C,
+            'buttonV' : Phaser.Input.Keyboard.KeyCodes.V,
             'buttonX' : Phaser.Input.Keyboard.KeyCodes.X,
             
         });
@@ -50,7 +57,6 @@ class Scene1 extends Phaser.Scene {
         this.control = this.scene.get('control');
       
         
-
         player = this.player = this.physics.add.sprite(this.x, this.y, 'player');
         this.barreVie = this.physics.add.sprite(0,0,'barreVie').setOrigin(0,0);
         this.barreVie.setScrollFactor(0,0);
@@ -58,16 +64,45 @@ class Scene1 extends Phaser.Scene {
         this.buttonProj.setScrollFactor(0,0);
         this.heal = this.physics.add.sprite(685,341,'Heal').setOrigin(0,0);
         this.heal.setScrollFactor(0,0);
+
+        timerRecovery = this.timerRecovery
+        recovery = this.recovery
+        vieAbba = this.vieAbba
         vie = this.life;
         blood = this.sang;
+        toucheSol = this.sol;
+        doubleSaut = this.deuxSol;
+        doubleSautActif = this.deuxSolActif;
+
+        this.projectiles = this.add.group();
+
+
+        this.hitbox = this.add.group();
+
+
+
+        this.araigne = this.physics.add.group();
+        this.araigne1 = new Araigne(this,2000,550,"Araigne");
+        //this.araigne2 = new Araigne(this,3400,550,"Araigne");
+        
+        this.abbadon = this.physics.add.group();
+        new Abbadon(this,3600,450,"Abbadon");
+        
+        this.archer = this.physics.add.group();
+        new Archer(this,3800,550,"Archer");
+        
+        this.chauve_souris = this.physics.add.group();
+        new Chauve_souris(this,4000,550,"Chauve_Souris");
+        
+
         this.player.setGravityY(200);
-        this.player.body.setSize(80,120).setOffset(100,70)
+        this.player.body.setSize(80,120).setOffset(100,20)
         this.player.setBounce(0.0);
         this.player.setCollideWorldBounds(true);
 
         this.control.resetTouche(this.cursors);
 
-        this.projectiles = this.add.group();
+     
 
         this.cameras.main.startFollow(this.player);
         this.cameras.main.setBounds(0, 0, 6400, 3300);
@@ -75,10 +110,32 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.player,sol,resetJump);
         this.physics.add.collider(this.player,platform,resetJump);
         this.physics.add.collider(this.player,wall,resetJump);
+
+
+
+        this.physics.add.collider(this.araigne,sol);
+        this.physics.add.collider(this.araigne,platform);
+        this.physics.add.collider(this.araigne,wall);
+
+
+
         this.physics.add.collider(this.player,pique,mort);
+        this.physics.add.collider(this.player,this.araigne,degat);
+
+
+
         this.physics.add.collider(this.projectiles,wall,destroyBullet);
-        
-        this.bgcontrol = this.add.image(100,350,"control").setOrigin(0,0);
+        this.physics.add.collider(this.hitbox,this.araigne,atkAraigne);
+        this.physics.add.collider(this.hitbox,this.archer,atkAraigne);
+        this.physics.add.collider(this.hitbox,this.chauve_souris,atkAraigne);
+        this.physics.add.collider(this.projectiles,this.araigne,projAraigne);
+        this.physics.add.collider(this.projectiles,this.archer,projAraigne);
+        this.physics.add.collider(this.projectiles,this.chauve_souris,projAraigne);
+
+        this.physics.add.overlap(this.projectiles,this.abbadon,projAbbadon,null,this)
+
+
+        this.bgcontrol = this.add.image(125,400,"control").setOrigin(0,0);
         this.bgcontrol.setVisible(false);
 
     }
@@ -325,15 +382,15 @@ class Scene1 extends Phaser.Scene {
             
         }
        
-    toucheSol = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[2];
-    doubleSaut = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[3];
-    doubleSautActif = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[4];
+    toucheSol = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[2];
+    doubleSaut = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[3];
+    doubleSautActif = this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[4];
 
     this.player.setVelocity(
         //X
-        this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[0],
+        this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[0],
         //Y
-        this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif)[1]);
+        this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[1]);
 
         if (fire==true)
         {
@@ -352,6 +409,30 @@ class Scene1 extends Phaser.Scene {
             this.heal.anims.play("HealOff",true);
         }
     
+        if (this.cursors.buttonV.isDown && attaque == true && this.player.body.onFloor() || pad.X && attaque == true && this.player.body.onFloor()  )
+        {
+            this.attack = new Attack(this);
+            attaque=false ;
+            this.player.setVelocityX(0);
+            this.player.setVelocityY(0);
+        }
+        if(attaque == false){
+            timerAtk = timerAtk + 1
+            if(timerAtk >= 10)
+            {
+                attaque=true;
+                timerAtk = 0;
+                this.attack.destroy();
+            }
+        }
+        if(recovery == false){
+            timerRecovery = timerRecovery + 1
+            if(timerRecovery >= 60)
+            {
+                recovery=true;
+                timerRecovery = 0;
+            }
+        }
         if (this.cursors.buttonX.isDown && fire==true && nbProjectile==true || pad.B && fire==true && nbProjectile==true)
         {
             this.shootBeam();
@@ -399,6 +480,21 @@ class Scene1 extends Phaser.Scene {
             }
         }
 
+        for(var i = 0; i < this.araigne.getChildren().length; i++){
+            var araigne = this.araigne.getChildren()[i];
+            animAraigne = araigne.movement(this.player,animAraigne);
+        }
+        if (animAraigne)
+        {
+            this.player.setTint(0x00ff00);
+            this.araigne1.flipX = 180;
+        }
+        if (!animAraigne)
+        {
+            this.player.setTint(0xFF0000);
+            this.araigne1.flipX = 0;
+        }
+
         if (this.cursors.buttonX.isUp && vie>0 && recoveryProjectile == false || !pad.B && vie>0 && recoveryProjectile == false)
         {
             fire=true;
@@ -429,10 +525,10 @@ class Scene1 extends Phaser.Scene {
        
         }
     }
-
     shootBeam(){
         var beam = new Beam(this);
     }
+
 
 }
 function resetJump() {
@@ -440,11 +536,35 @@ function resetJump() {
     {
         toucheSol=true;
         doubleSaut=false;
+        doubleSautActif=false;
     }
     }
    
 function mort() {
     vie = 0 ;
+}
+function degat() {
+    if (recovery==true)
+    {
+        vie -= 1 ;
+        recovery=false ;
+    }
+    
+}
+function atkAraigne(player,araigne) {
+    araigne.destroy();
+}
+function projAraigne(projectiles,araigne) {
+    araigne.destroy();
+    projectiles.destroy();
+}
+function projAbbadon(projectiles,abbadon) {
+    vieAbba -=1 ;
+    projectiles.destroy();
+    if (vieAbba <= 0)
+    {
+        abbadon.destroy();
+    }
 }
 
 function destroyBullet(projectiles,wall)

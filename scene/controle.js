@@ -23,17 +23,17 @@ class Control extends Phaser.Scene{
         return (inputP);
     }
     
-    move(inputP, player, playerSpeed, speed ,toucheSol,firedirection,doubleSaut,doubleSautActif){
+    move(inputP, player, playerSpeed, speed ,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque){
         playerSpeed = speed;
         
 
-        if (inputP[0] && !inputP[4]){
+        if (inputP[0] && !inputP[4] && attaque==true){
             player.setVelocityX(playerSpeed);
             firedirection[0]=true;
             firedirection[1]=false;
         }
         
-        if (inputP[1] && !inputP[4]){
+        if (inputP[1] && !inputP[4] && attaque==true){
             player.setVelocityX(-playerSpeed);
             firedirection[0]=false;
             firedirection[1]=true;
@@ -47,21 +47,24 @@ class Control extends Phaser.Scene{
             player.setVelocityX(0);
         }
 
-        if (inputP[3]  && toucheSol==true){
+        if (inputP[3]  && toucheSol==true && attaque==true){
             player.setVelocityY(-250);
             toucheSol=false;
         }
 
-        if (!inputP[3] && toucheSol==false && doubleSaut==false)
+        if (!inputP[3] && toucheSol==false && doubleSaut==false &&  attaque==true)
         {
+            
             doubleSautActif=true;
+            
         }
-
-        if (inputP[3] && doubleSautActif==true)
+        if (inputP[3] && doubleSautActif==true &&  attaque==true)
         {
             player.setVelocityY(-250);
             doubleSautActif = false;
             doubleSaut = true;
+            
+            
         }
         
         return [player.body.velocity.x, player.body.velocity.y,toucheSol,doubleSaut,doubleSautActif];

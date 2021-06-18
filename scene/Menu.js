@@ -8,15 +8,33 @@ class Menu extends Phaser.Scene{
         this.load.spritesheet("player","Asset/Perso_Eclipse.png", { frameWidth: 200 , frameHeight: 200 });
         this.load.spritesheet("barreVie","Asset/Vie.png", { frameWidth: 275.3 , frameHeight: 99.6 });
         this.load.image("bg","Asset/Ecran_Titre.png");
+        this.load.image("attack","Asset/Attack.png");
         this.load.image("control","Asset/control.png");
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
         this.load.spritesheet("buttonProj","asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
         this.load.spritesheet("Heal","asset/life.png", { frameWidth: 101 , frameHeight: 105 });
+        this.load.spritesheet("Araigne","asset/Araigne.png", { frameWidth: 120 , frameHeight: 40 });
+        this.load.spritesheet("Abbadon","asset/Abbadon.png", { frameWidth: 300 , frameHeight: 300 });
+        this.load.spritesheet("Archer","asset/Archer.png", { frameWidth: 100 , frameHeight: 200 });
+        this.load.spritesheet("Chauve_Souris","asset/Chauve_Souris.png", { frameWidth: 67 , frameHeight: 67 });
         this.load.tilemapTiledJSON('Foret', 'Asset/Map_eClipse.json');
         this.load.image('Map',"Asset/Asset_eClipse.png");
     }
     create(){
         this.scene.start('titre')
+
+        this.anims.create({
+            key: 'AraiRight',
+            frames: this.anims.generateFrameNumbers('Araigne', { start: 2, end: 3 }),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'AraiLeft',
+            frames: this.anims.generateFrameNumbers('Araigne', { start: 0, end: 1 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'Projright',

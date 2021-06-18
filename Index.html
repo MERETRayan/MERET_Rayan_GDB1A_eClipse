@@ -7,7 +7,12 @@
     <script type="text/javascript" src= "scene/Menu.js"></script>
     <script type="text/javascript" src= "scene/controle.js"></script>
     <script type="text/javascript" src= "scene/Projectile.js"></script>
+    <script type="text/javascript" src= "scene/Attack.js"></script>
     <script type="text/javascript" src= "scene/Ecran_Titre.js"></script>
+    <script type="text/javascript" src= "scene/Araigne.js"></script>
+    <script type="text/javascript" src= "scene/Archer.js"></script>
+    <script type="text/javascript" src= "scene/Chauve_souris.js"></script>
+    <script type="text/javascript" src= "scene/Abbadon.js"></script>
     <script type="text/javascript" src= "scene/Scene1.js"></script>
     <style type="text/css">
         body {
@@ -24,14 +29,20 @@ var inputP = [false, false, false, false,false];
 var xAxis = 0;
 var yAxis = 0;
 
-var toucheSol=true;
-var doubleSaut=false;
-var doubleSautActif=false;
+var toucheSol;
+var doubleSaut;
+var doubleSautActif;
+
+var recovery;
+var timerRecovery;
 
 var vie;
 var blood ;
 var debut = true;
+var vieAbba;
 
+var attaque = true;
+var timerAtk = 0 ;
 var cdHeal = true ;
 var timerHeal = 0 ; 
 
@@ -43,6 +54,7 @@ var recoveryProjectile = true;
 
 var gainSang = true;
 var timerSang = 0 ;
+var animAraigne;
 
 var x = 0 ;
 var y = 0 ;
@@ -60,7 +72,7 @@ var config = {
         default: 'arcade',
         arcade: { 
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
         
     },
