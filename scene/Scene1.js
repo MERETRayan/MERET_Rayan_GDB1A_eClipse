@@ -84,16 +84,16 @@ class Scene1 extends Phaser.Scene {
         this.araigne = this.physics.add.group();
         this.araigne1 = new Araigne(this,2000,550,"Araigne");
         this.araigne2 = new Araigne(this,3400,550,"Araigne");
+        this.araigne3 = new Araigne(this,3800,2300,"Araigne");
         
         this.abbadon = this.physics.add.group();
-        new Abbadon(this,3600,450,"Abbadon");
         
         this.archer = this.physics.add.group();
-        new Archer(this,3800,550,"Archer");
         
         this.chauve_souris = this.physics.add.group();
         new Chauve_souris(this,4000,600,"Chauve_Souris");
-        
+        this.chauve_souris1 = new Chauve_souris(this,3800,2200,"Chauve_Souris");
+        this.chauve_souris1.flipX = 180;
 
         this.player.setGravityY(200);
         this.player.body.setSize(80,120).setOffset(100,20)
@@ -124,8 +124,8 @@ class Scene1 extends Phaser.Scene {
 
 
         this.physics.add.collider(this.player,pique,mort);
-        this.physics.add.collider(this.player,this.araigne,degat);
-
+        this.physics.add.overlap(this.player,this.araigne,degat);
+        this.physics.add.overlap(this.player,this.chauve_souris,degat);
 
 
         this.physics.add.collider(this.projectiles,wall,destroyBullet);
@@ -510,6 +510,14 @@ class Scene1 extends Phaser.Scene {
         if (this.player.x > this.araigne2.x)
         {
             this.araigne2.flipX = 0;
+        }
+        if (this.player.x < this.araigne3.x)
+        {
+            this.araigne3.flipX = 180;
+        }
+        if (this.player.x > this.araigne3.x)
+        {
+            this.araigne3.flipX = 0;
         }
 
         if (this.cursors.buttonX.isUp && vie>0 && recoveryProjectile == false || !pad.B && vie>0 && recoveryProjectile == false)

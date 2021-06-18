@@ -9,6 +9,6 @@ class Archer extends Phaser.GameObjects.Sprite{
   
     }
     update(player){
-
+      
     }
   }
