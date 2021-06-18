@@ -9,6 +9,5 @@ class Chauve_souris extends Phaser.GameObjects.Sprite{
   
     }
     update(player){
-
     }
   }
