@@ -63,10 +63,31 @@ class Scene1 extends Phaser.Scene {
         if (seau2 == false){
             item2 = item.create(3250,1630,"seau");
         }
-        if (seau1 == false){
-            
-        }
         
+        this.porte = this.physics.add.staticGroup();
+        
+        if (porte_1 == false)
+        {
+           this.porte1 =  this.porte.create(4200,550,"porte1")
+           this.porte1.body.setSize(600,20).setOffset(0,20);
+        }
+        if (porte_2 == false)
+        {
+            this.porte2 = this.porte.create(1380,2370,"porte2");
+            this.porte2.body.setSize(600,20).setOffset(0,20);
+        }
+
+
+        this.stele = this.physics.add.staticGroup();
+        if (stele_1 == false)
+        {
+           this.stele1 =  this.stele.create(4300,510,"stele1")
+        }
+        if (stele_2 == false)
+        {
+            this.stele2 = this.stele.create(1280,2330,"stele2")
+        }
+
         
         sceau = this.physics.add.sprite(700, 0, 'sceau').setOrigin(0,0);
         sceau.setScrollFactor(0,0);
@@ -91,6 +112,7 @@ class Scene1 extends Phaser.Scene {
 
 
         this.hitbox = this.add.group();
+
 
 
 
@@ -124,7 +146,10 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.player,sol,resetJump);
         this.physics.add.collider(this.player,platform,resetJump);
         this.physics.add.collider(this.player,wall,resetJump);
-        
+        this.physics.add.collider(this.player,this.porte,resetJump);
+        this.physics.add.collider(this.player,this.stele1,overture1);
+        this.physics.add.collider(this.player,this.stele2,overture2);
+
         this.physics.add.collider(this.player,item1,collect1);
         this.physics.add.collider(this.player,item2,collect2);
 
@@ -160,6 +185,7 @@ class Scene1 extends Phaser.Scene {
     }
  
     update(){
+
         let pad = Phaser.Input.Gamepad.Gamepad;
     
         if(this.input.gamepad.total){   //Si une manette est connecté
@@ -179,6 +205,16 @@ class Scene1 extends Phaser.Scene {
         }
         if (debut==false)
         {
+            if (porte_1==true)
+            {
+                this.porte1.destroy();
+                this.stele1.destroy();
+            }
+            if (porte_2==true)
+            {
+                this.porte2.destroy();
+                this.stele2.destroy();
+            }
             if (seau==0){
                 sceau.anims.play("0seau",true);
             }
@@ -603,6 +639,22 @@ function degat() {
         recovery=false ;
     }
     
+}
+function overture1(player,stele)
+{
+    if (seau1==true)
+    {
+        stele_1=true;
+        porte_1=true;
+    }
+}
+function overture2(player,stele)
+{
+    if (seau2==true)
+    {
+        stele_2=true;
+        porte_2=true;
+    }
 }
 function atkAraigne(player,araigne) {
     araigne.destroy();

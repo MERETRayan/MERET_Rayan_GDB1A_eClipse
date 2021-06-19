@@ -10,6 +10,10 @@ class Menu extends Phaser.Scene{
         this.load.image("bg","Asset/Ecran_Titre.png");
         this.load.image("attack","Asset/Attack.png");
         this.load.image("control","Asset/control.png");
+        this.load.image("stele1","Asset/Stele_1.png");
+        this.load.image("stele2","Asset/Stele_2.png");
+        this.load.image("porte1","Asset/porte_1.png");
+        this.load.image("porte2","Asset/porte_2.png");
         this.load.image("seau","Asset/sceau.png");
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
         this.load.spritesheet("sceau","Asset/Sceau_UI.png", { frameWidth: 200 , frameHeight: 120 });
