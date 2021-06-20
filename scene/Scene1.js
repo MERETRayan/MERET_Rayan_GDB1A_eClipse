@@ -53,7 +53,7 @@ class Scene1 extends Phaser.Scene {
             'buttonX' : Phaser.Input.Keyboard.KeyCodes.X,
             
         });
-
+        this.end = false ;
         this.control = this.scene.get('control');
 
         item = this.physics.add.group();
@@ -76,7 +76,7 @@ class Scene1 extends Phaser.Scene {
             this.porte2 = this.porte.create(1380,2370,"porte2");
             this.porte2.body.setSize(600,20).setOffset(0,20);
         }
-
+        this.arret=false;
 
         this.stele = this.physics.add.staticGroup();
         if (stele_1 == false)
@@ -87,7 +87,7 @@ class Scene1 extends Phaser.Scene {
         {
             this.stele2 = this.stele.create(1280,2330,"stele2")
         }
-
+        this.fin =  this.physics.add.sprite(4050,2980,'Halo').setOrigin(0,0);
         
         sceau = this.physics.add.sprite(700, 0, 'sceau').setOrigin(0,0);
         sceau.setScrollFactor(0,0);
@@ -98,6 +98,7 @@ class Scene1 extends Phaser.Scene {
         this.buttonProj.setScrollFactor(0,0);
         this.heal = this.physics.add.sprite(685,341,'Heal').setOrigin(0,0);
         this.heal.setScrollFactor(0,0);
+        
 
         timerRecovery = this.timerRecovery
         recovery = this.recovery
@@ -121,7 +122,7 @@ class Scene1 extends Phaser.Scene {
         this.araigne2 = new Araigne(this,3400,550,"Araigne");
         this.araigne3 = new Araigne(this,3800,2300,"Araigne");
 
-        
+        this.timearret=0;
         this.abbadon = this.physics.add.group();
         
         this.archer = this.physics.add.group();
@@ -132,7 +133,7 @@ class Scene1 extends Phaser.Scene {
         this.chauve_souris1.flipX = 180;
 
         this.player.setGravityY(200);
-        this.player.body.setSize(80,120).setOffset(100,20)
+        this.player.body.setSize(80,120).setOffset(60,43)
         this.player.setBounce(0.0);
         this.player.setCollideWorldBounds(true);
 
@@ -177,7 +178,7 @@ class Scene1 extends Phaser.Scene {
         this.physics.add.collider(this.projectiles,this.chauve_souris,projAraigne);
 
         this.physics.add.overlap(this.projectiles,this.abbadon,projAbbadon,null,this)
-
+        this.physics.add.overlap(this.player,this.fin,fin,null,this)
 
         this.bgcontrol = this.add.image(125,400,"control").setOrigin(0,0);
         this.bgcontrol.setVisible(false);
@@ -205,6 +206,7 @@ class Scene1 extends Phaser.Scene {
         }
         if (debut==false)
         {
+            this.fin.anims.play("Halo",true);
             if (porte_1==true)
             {
                 this.porte1.destroy();
@@ -460,6 +462,56 @@ class Scene1 extends Phaser.Scene {
         //Y
         this.control.move(this.control.inputPP(this.cursors, inputP, pad, xAxis, yAxis), this.player,this.playerSpeed, this.speed,toucheSol,firedirection,doubleSaut,doubleSautActif,attaque)[1]);
 
+
+
+        if (this.player.body.velocity.x < 0)
+        {
+            this.player.anims.play("marchegauche",true);
+        }
+        if (this.player.body.velocity.x > 0)
+        {
+            this.player.anims.play("marchedroite",true);
+        }
+        if (this.player.body.velocity.x == 0 && this.arret==false )
+        {
+           if (firedirection[0])
+           {
+            this.player.anims.play("arretdroite",true);
+           }
+           if (firedirection[1])
+           {
+            this.player.anims.play("arretgauche",true);
+           }
+        }
+
+        if (this.player.body.velocity.y < 0)
+        {
+            if (firedirection[0])
+           {
+            this.player.anims.play("hautdroite",true);
+           }
+           if (firedirection[1])
+           {
+            this.player.anims.play("hautgauche",true);
+           }
+        }
+        if (this.player.body.velocity.y > 0)
+        {
+            if (firedirection[0] )
+           {
+            this.player.anims.play("basdroite",true);
+           }
+           if (firedirection[1])
+           {
+            this.player.anims.play("basgauche",true);
+           }
+        }
+
+
+
+
+
+
         if (fire==true)
         {
             this.buttonProj.anims.play("ProjOn",true);
@@ -479,6 +531,15 @@ class Scene1 extends Phaser.Scene {
     
         if (this.cursors.buttonV.isDown && attaque == true && this.player.body.onFloor() || pad.X && attaque == true && this.player.body.onFloor()  )
         {
+            this.arret=true ;
+            if (firedirection[0])
+            {
+                this.player.anims.play("attaquedroite",true)
+            }
+            if (firedirection[1])
+            {
+                this.player.anims.play("attaquegauche",true)
+            }
             this.attack = new Attack(this);
             attaque=false ;
             this.player.setVelocityX(0);
@@ -499,6 +560,14 @@ class Scene1 extends Phaser.Scene {
             {
                 recovery=true;
                 timerRecovery = 0;
+            }
+        }
+        if(this.arret == true){
+            this.timearret = this.timearret + 1
+            if(this.timearret >= 30)
+            {
+                this.arret=false;
+                this.timearret = 0;
             }
         }
         if (this.cursors.buttonX.isDown && fire==true && nbProjectile==true || pad.B && fire==true && nbProjectile==true)
@@ -583,7 +652,10 @@ class Scene1 extends Phaser.Scene {
         {
             this.araigne3.flipX = 0;
         }
-
+        if (this.end==true)
+        {
+            this.scene.start("victoire");
+        }
         if (this.cursors.buttonX.isUp && vie>0 && recoveryProjectile == false || !pad.B && vie>0 && recoveryProjectile == false)
         {
             fire=true;
@@ -690,4 +762,9 @@ function projAbbadon(projectiles,abbadon) {
 function destroyBullet(projectiles,wall)
 {
     projectiles.destroy();
+}
+
+function fin ()
+{
+    this.end = true;
 }

@@ -2,17 +2,17 @@ class Attack extends Phaser.GameObjects.Sprite{
     constructor(scene){
       if (firedirection[0])
       {
-      var x = scene.player.x+115;
+      var x = scene.player.x+70;
       var y = scene.player.y+10;
       }
       else if (firedirection[1])
       {
-      var x = scene.player.x-35;
+      var x = scene.player.x-70;
       var y = scene.player.y+10;
       }
       else 
       {
-        var x = scene.player.x+115;
+        var x = scene.player.x+70;
         var y = scene.player.y+10;
       }
       super(scene, x, y, "attack");

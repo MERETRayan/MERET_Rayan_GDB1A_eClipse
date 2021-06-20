@@ -10,11 +10,13 @@ class Menu extends Phaser.Scene{
         this.load.image("bg","Asset/Ecran_Titre.png");
         this.load.image("attack","Asset/Attack.png");
         this.load.image("control","Asset/control.png");
+        this.load.image("victoire","Asset/victoire.png");
         this.load.image("stele1","Asset/Stele_1.png");
         this.load.image("stele2","Asset/Stele_2.png");
         this.load.image("porte1","Asset/porte_1.png");
         this.load.image("porte2","Asset/porte_2.png");
         this.load.image("seau","Asset/sceau.png");
+        this.load.spritesheet("Halo","Asset/Halo.png", { frameWidth: 150 , frameHeight: 60 });
         this.load.spritesheet("beam","Asset/ProjSang.png", { frameWidth: 80 , frameHeight: 64 });
         this.load.spritesheet("sceau","Asset/Sceau_UI.png", { frameWidth: 200 , frameHeight: 120 });
         this.load.spritesheet("buttonProj","Asset/Projectile.png", { frameWidth: 101 , frameHeight: 105 });
@@ -28,6 +30,76 @@ class Menu extends Phaser.Scene{
     }
     create(){
         this.scene.start('titre')
+
+        this.anims.create({
+            key: 'marchedroite',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 3}),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'marchegauche',
+            frames: this.anims.generateFrameNumbers('player', { start: 7, end: 4 }),
+            frameRate: 4,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'attaquedroite',
+            frames: this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+            frameRate: 10,
+        });
+        this.anims.create({
+            key: 'attaquegauche',
+            frames: this.anims.generateFrameNumbers('player', { start: 15, end: 12 }),
+            frameRate: 10,
+        });
+
+        this.anims.create({
+            key: 'arretdroite',
+            frames: [ { key: 'player', frame: 0 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'arretdroite',
+            frames: [ { key: 'player', frame: 7 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'hautdroite',
+            frames: [ { key: 'player', frame: 16 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'hautgauche',
+            frames: [ { key: 'player', frame: 20 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'basdroite',
+            frames: [ { key: 'player', frame: 24 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'basgauche',
+            frames: [ { key: 'player', frame: 28 } ],
+            frameRate: 10,
+            repeat: -1
+        });
+
+
+
+
+        this.anims.create({
+            key: 'Halo',
+            frames: this.anims.generateFrameNumbers('Halo', { start: 0, end: 2 }),
+            frameRate: 10,
+            repeat: -1
+        });
 
         this.anims.create({
             key: 'Chauve',
